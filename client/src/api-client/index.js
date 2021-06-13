@@ -218,8 +218,8 @@ class APIClient {
   }
 
   doAnonymousLogin() {
-    window.location = `${this.baseUrl}/auth/jupyterhub/login-tmp` + // eslint-disable-line
-      `?redirect_url=${encodeURIComponent(window.location.href)}`;
+    // window.location = `${this.baseUrl}/auth/jupyterhub/login-tmp` + // eslint-disable-line
+    //   `?redirect_url=${encodeURIComponent(window.location.href)}`;
   }
 
   doLogin() {
