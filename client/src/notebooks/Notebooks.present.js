@@ -1404,8 +1404,42 @@ class StartNotebookServerOptions extends Component {
     }
 
     return renderedServerOptions.length ?
-      renderedServerOptions.concat(globalWarning) :
+      renderedServerOptions.concat(<S3BucketForm {...this.props}/>).concat(globalWarning) :
       <label>Notebook options not available</label>;
+  }
+}
+
+class S3BucketForm extends Component {
+  render() {
+    const onChangeValue = (id) => (event) => {
+      const newDatasets = [...this.props.filters.datasets];
+      newDatasets[id][event.target.name] = event.target.value;
+      this.props.handlers.setS3Options(newDatasets);
+    }
+    const onChangeRows = (increment) => () => {
+      if (!increment && this.props.filters.datasets.length >= 1) 
+        this.props.handlers.setS3Options(this.props.filters.datasets.filter( (_, i) => i !== this.props.filters.datasets.length - 1 ))
+      if (increment) this.props.handlers.setS3Options([...this.props.filters.datasets, {bucket: "", endpoint: "", access_key: "", secret_key: ""}])
+    }
+    const renderRows = (datasets) => datasets.map( (elem, ind) => (
+      <Row className="pb-2">
+        <Col><Input placeholder="Bucket name" type="text" name="bucket" value={elem.bucket} onChange={onChangeValue(ind)}/></Col>
+        <Col><Input placeholder="Endpoint" type="text" name="endpoint" value={elem.endpoint} onChange={onChangeValue(ind)}/></Col>
+        <Col><Input placeholder="Access key" type="text" name="access_key" value={elem.access_key} onChange={onChangeValue(ind)}/></Col>
+        <Col><Input placeholder="Secret key" type="password" name="secret_key" value={elem.secret_key} onChange={onChangeValue(ind)}/></Col>
+      </Row>) 
+    )
+    return (
+      <FormGroup>
+        <Label>S3 datasets</Label>
+        {this.props.filters.datasets.length == 0 ? <div><Label>Use the +/- buttons below to specify and mount S3 buckets</Label></div> : renderRows(this.props.filters.datasets)}
+        <div className="ps-4">
+          <Button onClick={onChangeRows(true)} color="primary">+</Button>
+          &nbsp;
+          <Button onClick={onChangeRows(false)} color="primary">-</Button>
+        </div>  
+      </FormGroup>
+    );
   }
 }
 

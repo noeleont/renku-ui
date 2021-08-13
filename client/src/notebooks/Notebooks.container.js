@@ -175,7 +175,8 @@ class StartNotebookServer extends Component {
       toggleMergedBranches: this.toggleMergedBranches.bind(this),
       setDisplayedCommits: this.setDisplayedCommits.bind(this),
       setServerOption: this.setServerOptionFromEvent.bind(this),
-      startServer: this.startServer.bind(this)
+      startServer: this.startServer.bind(this),
+      setS3Options: this.setS3Options.bind(this)
     };
 
     this.state = {
@@ -333,6 +334,10 @@ class StartNotebookServer extends Component {
     }
 
     this.coordinator.setNotebookOptions(option, value);
+  }
+
+  setS3Options(value) {
+    this.coordinator.setS3Options(value);
   }
 
   internalStartServer() {

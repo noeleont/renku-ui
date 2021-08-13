@@ -239,7 +239,8 @@ class NotebooksCoordinator {
         project: null,
         branch: { $set: {} },
         commit: { $set: {} },
-        options: { $set: {} }
+        options: { $set: {} },
+        datasets: []
       },
       pipelines: {
         fetched: null,
@@ -303,6 +304,10 @@ class NotebooksCoordinator {
 
   setNotebookOptions(option, value) {
     this.model.set(`filters.options.${option}`, value);
+  }
+
+  setS3Options(value) {
+    this.model.set("filters.datasets", value);
   }
 
   getQueryFilters() {
@@ -755,7 +760,8 @@ class NotebooksCoordinator {
   // * Change notebook status * //
   startServer() {
     const options = {
-      serverOptions: this.model.get("filters.options")
+      serverOptions: this.model.get("filters.options"),
+      datasets: this.model.get("filters.datasets"),
     };
     const filters = this.model.get("filters");
     const namespace = filters.namespace;
