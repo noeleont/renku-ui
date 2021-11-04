@@ -52,7 +52,7 @@ class StatuspageAPI {
 }
 
 function isStatusConfigured(statuspageId) {
-  return statuspageId != null && statuspageId.length > 0;
+  return statuspageId != null && statuspageId.trim().length > 0;
 }
 
 function setStatusSummary(model, statusSummary) {
