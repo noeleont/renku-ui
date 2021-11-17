@@ -32,6 +32,7 @@ import { generateFakeUser } from "../user/User.test";
 import { ShowFile, JupyterButton, FilePreview } from "./index";
 import { StateModel, globalSchema } from "../model";
 import { NotebookSourceDisplayMode, tweakCellMetadata } from "./File.present";
+import "jest-canvas-mock";
 
 const model = new StateModel(globalSchema);
 
@@ -57,7 +58,7 @@ describe("rendering", () => {
     },
     pdf: {
       file_name: "text.pdf",
-      content: "Q291bnRyeSwxOTkwLDE5OTBfbG93ZXIsIDE5OTBfdXBwZXIsMT"
+      content: "JVBERi0xLjAKMSAwIG9iajw8L1BhZ2VzIDIgMCBSPj5lbmRvYmogMiAwIG9iajw8L0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iaiAzIDAgb2JqPDwvTWVkaWFCb3hbMCAwIDMgM10+PmVuZG9iagp0cmFpbGVyPDwvUm9vdCAxIDAgUj4+Cg=="
     },
     text: {
       file_name: "text.csv",
