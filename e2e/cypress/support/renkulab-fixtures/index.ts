@@ -22,7 +22,8 @@
 import BaseFixtures from "./fixtures";
 import { User } from "./user";
 import { Projects } from "./projects";
+import { Session } from "./session";
 
-const Fixtures = Projects(User(BaseFixtures));
+const Fixtures = Session(Projects(User(BaseFixtures)));
 
 export default Fixtures;
