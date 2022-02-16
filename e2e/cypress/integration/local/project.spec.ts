@@ -66,7 +66,6 @@ describe("display migration information", () => {
   it("displays recommended migration", () => {
     fixtures.projectMigrationRecommended();
     cy.visit("/projects/e2e/local-test-project/overview/status");
-    cy.wait("@getCoreServiceVersion");
     // Check that the migration suggestion is shown
     cy.contains(
       "Updating to the latest version of renku is highly recommended."
@@ -112,7 +111,6 @@ describe("display migration information for anon user", () => {
   it("displays recommended migration", () => {
     fixtures.projectMigrationRecommended();
     cy.visit("/projects/e2e/local-test-project/overview/status");
-    cy.wait("@getCoreServiceVersion");
     // Check that the migration suggestion is not shown
     cy.contains("Project Renku Version");
     cy.contains(
@@ -161,7 +159,6 @@ describe("display migration information for observer user", () => {
   it("displays recommended migration", () => {
     fixtures.projectMigrationRecommended();
     cy.visit("/projects/e2e/local-test-project/overview/status");
-    cy.wait("@getCoreServiceVersion");
     // Check that the migration suggestion is shown
     cy.contains(
       "Updating to the latest version of renku is highly recommended."
